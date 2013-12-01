@@ -83,13 +83,14 @@ func getToken(s []byte, i int) (string, int) {
   var b byte
   for add, b = range s[i:] {
     switch b {
-    case str:
+    case '"':
       return ins, i + add
     default:
       ins += string(b)
     }
   }
   log.Panic("Malformed VDF. Unclosed quotes.")
+  return "", 0
 }
 
 func ToJson(body io.ReadCloser) ([]byte, error) {
